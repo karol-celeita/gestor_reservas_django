@@ -1,0 +1,210 @@
+* {
+  box-sizing: border-box;
+  
+}
+
+body {
+  margin: 0px;
+  font-family: 'segoe ui';
+}
+
+
+.nav {
+  height: 50px;
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+}
+
+.nav > .nav-header {
+  display: inline;
+}
+
+.nav > .nav-header > .nav-title {
+  display: inline-block;
+  font-size: 22px;
+  color: #333;
+  padding: 10px 10px 10px 10px;
+}
+
+.nav > .nav-btn {
+  display: none;
+}
+
+.nav > .nav-links {
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+.nav > .nav-links > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.nav > .nav-links > a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav > #nav-check {
+  display: none;
+}
+
+@media (max-width:600px) {
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+  }
+  .nav > .nav-links > a {
+    display: block;
+    width: 100%;
+  }
+  .nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+  .nav > #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+}
+
+
+
+/*   FORMULARIO */
+
+body{
+  background-color: #eee !important;
+
+}
+
+.section-one img{
+  max-width: 900px;
+  height: 665px;
+}
+.get-in-touch {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 35px 35px 0 35px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 5px 30px 0px rgb(167 167 167 / 16%);
+}
+.get-in-touch .title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 35px;
+  line-height: 48px;
+  padding-bottom: 10px;
+     color: #5543ca;
+    background: #5543ca;
+    background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+    background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+    background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.contact-form .form-field {
+  position: relative;
+  margin: 32px 0;
+  text-align: center;
+}
+.contact-form .input-text {
+  display: block;
+  width: 100%;
+  height: 36px;
+  border-width: 0 0 2px 0;
+  border-color: #5543ca;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 400;
+}
+.contact-form .input-text:focus {
+  outline: none;
+}
+.contact-form .input-text:focus + .label,
+.contact-form .input-text.not-empty + .label {
+  -webkit-transform: translateY(-24px);
+          transform: translateY(-24px);
+}
+.contact-form .label {
+  position: absolute;
+  left: 20px;
+  bottom: 40px;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #5543ca;
+  cursor: text;
+  transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, 
+  -webkit-transform .2s ease-in-out;
+}
+.contact-form .submit-btn {
+  display: inline-block;
+  background-color: #000;
+   background-image: linear-gradient(125deg,#a72879,#064497);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  width:200px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.input-group-text {
+  display: block !important;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #fff !important;
+  border: 1px solid #fff !important;
+  border-radius: 0.375rem;
+}
+
+.form-control{
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom-color: #5543ca !important;
+}
