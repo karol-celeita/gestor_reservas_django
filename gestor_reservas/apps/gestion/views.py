@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import  CreateView
 from .models import *
+from datetime import  datetime
+from django.views.generic.list import ListView
 
 
 class ReservacionUsuario(CreateView):
@@ -12,7 +14,6 @@ class ReservacionUsuario(CreateView):
 	template_name = 'index.html'
 	success_url = reverse_lazy('home')
 	success_message = 'Se ha creado con éxito'
-	error_message = 'No hay espacios disponibles para esta fecha, prueba una fecha diferente'
 
 	def form_valid(self, form):
 		messages.success(self.request, self.success_message, extra_tags='God Job')
@@ -30,6 +31,7 @@ class ReservacionUsuario(CreateView):
 
 	#Validación que limpia el los input de un espacio inicial y final con strip al guardar
 	#https://www.peterbe.com/plog/automatically-strip-whitespace-in-django-forms
+ 
 	def clean(self):
 		for field in self.cleaned_data:
 			if isinstance(self.cleaned_data[field], basestring):
@@ -41,21 +43,38 @@ class ReservacionUsuario(CreateView):
 		form = self.form_class(request.POST) #cargo los datos del formulario
 
 		fecha=request.POST.get('fecha_reserva')
-		reservas_actuales=Usuarios.objects.filter(fecha_reserva=fecha).count()
-		reservas_totales= Reservacion.objects.values_list('puestos',flat=True)[0]
+		correo=request.POST.get('correo')
   
-		if reservas_actuales <= reservas_totales:
-			print("hay puesto")
-			if form.is_valid():
-				print("es valido")
-				form.save()
-				return self.form_valid(form)
-			else:
-				self.form_invalid(form)
-		else:
-			print("no hay puesto")
-			messages.error(self.request, self.error_message, extra_tags='Error')
+		date_time_obj = datetime.strptime(fecha, '%Y-%m-%d')
+		dia_reserva = date_time_obj.strftime('%A')
+
+		reservas_actuales=Usuarios.objects.filter(fecha_reserva=fecha).count()
+		reservas_totales= Reservacion.objects.filter(dias=dia_reserva).values_list('puestos',flat=True)[0]
+
+		if Usuarios.objects.filter(fecha_reserva=fecha, correo=correo).exists():
+			print("Usuario ya registrado")
+			messages.error(self.request, 'Ya existe una reserva asignada a este usuario, intenta con un correo diferente', extra_tags='Error')
 			return super().form_valid(form)
-   
+
+		else:
+			if reservas_actuales <= reservas_totales:
+				print("hay puesto")
+				if form.is_valid():
+					print("es valido")
+					form.save()
+					return self.form_valid(form)
+				else:
+					self.form_invalid(form)
+			else:
+				print("no hay puesto")
+				messages.error(self.request, 'No hay espacios disponibles para esta fecha, prueba una fecha diferente', extra_tags='Error')
+				return super().form_valid(form)
+	
 		return redirect(str(self.success_url))
 
+
+class ListaReservas(ListView):
+    model = Usuarios
+    template_name = 'lista_reservas.html'
+    context_object_name = 'data'
+    queryset: Usuarios.objects.all().order_by('fecha_reserva')

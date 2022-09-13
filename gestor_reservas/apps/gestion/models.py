@@ -5,8 +5,10 @@ from django.db import models
 
 class Reservacion(models.Model):
     puestos= models.IntegerField( verbose_name=u'Numero de puestos')
-    puestos_con_gerentes= models.IntegerField( verbose_name=u'Numero de puestos con gerentes')
+    dias= models.CharField(max_length=200, default="", verbose_name=u'Días de la semana')
 
+    def __str__(self):
+        return self.dias
         
     class Meta:
         verbose_name = "Puesto"

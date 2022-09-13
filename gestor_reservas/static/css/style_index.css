@@ -6,6 +6,9 @@
 body {
   margin: 0px;
   font-family: 'segoe ui';
+  background-image: url(../img/fondo.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -102,17 +105,13 @@ body {
 
 /*   FORMULARIO */
 
-body{
-  background-color: #eee !important;
-
-}
 
 .section-one img{
   max-width: 900px;
   height: 665px;
 }
 .get-in-touch {
-  max-width: 500px;
+  max-width: 600px;
   margin: 50px auto;
   padding: 35px 35px 0 35px;
   background: #fff;
@@ -128,9 +127,9 @@ body{
   padding-bottom: 10px;
      color: #5543ca;
     background: #5543ca;
-    background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
-    background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
-    background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;
+    background: -moz-linear-gradient(125deg,#28a79c,#97068b) !important;
+    background: -webkit-linear-gradient(125deg,#28a79c,#97068b) !important;
+    background: linear-gradient(125deg,#28a79c,#97068b) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
 }
@@ -144,8 +143,8 @@ body{
   display: block;
   width: 100%;
   height: 36px;
-  border-width: 0 0 2px 0;
-  border-color: #5543ca;
+  border-width: 0 0 1px 0;
+  border-color: #a7cadd;
   font-size: 15px;
   line-height: 26px;
   font-weight: 400;
@@ -164,8 +163,8 @@ body{
   bottom: 40px;
   font-size: 15px;
   line-height: 26px;
-  font-weight: 400;
-  color: #5543ca;
+  font-weight: 600;
+  color: #1370ad;
   cursor: text;
   transition: -webkit-transform .2s ease-in-out;
   transition: transform .2s ease-in-out;
@@ -175,9 +174,8 @@ body{
 .contact-form .submit-btn {
   display: inline-block;
   background-color: #000;
-   background-image: linear-gradient(125deg,#a72879,#064497);
+   background-image: linear-gradient(125deg,#28a79c,#97068b);
   color: #fff;
-  text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 16px;
   padding: 8px 16px;
@@ -185,6 +183,31 @@ body{
   width:200px;
   cursor: pointer;
   border-radius: 20px;
+}
+
+.contact-form .space-btn {
+  display: inline-block;
+  border: 1px solid #97068b;
+  color: #97068b;
+  letter-spacing: 2px;
+  font-size: 16px;
+  padding: 8px 16px;
+  width:200px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.contact-form .space-btn:hover {
+ 
+  border: 1px solid #0508b9;
+  color: #0508b9;
+}
+
+.contact-form .submit-btn:hover {
+ 
+  border: 1px solid #97068b;
+  color: #fff;
+  font-weight: 600;
 }
 
 .input-group-text {
@@ -206,5 +229,18 @@ body{
   border-top: none !important;
   border-left: none !important;
   border-right: none !important;
-  border-bottom-color: #5543ca !important;
+  border-bottom-color: #a7cadd !important;
+}
+
+.mensaje{
+    background-color: rgb(221 221 255);
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.img-vacio{
+    width: 90px;
+    margin-left: 12px;
+    margin-bottom: 20px;
 }
