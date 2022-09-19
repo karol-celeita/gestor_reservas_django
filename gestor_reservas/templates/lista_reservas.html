@@ -1,22 +1,100 @@
 {% load static%}
+
+
+<style>
+    .titile{
+        font-weight: bold;
+    }
+</style>
 <body>
 
     <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
 
-<div class="modal-dialog  modal-dialog-centered" role="document">
+
+<div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
     <div class="modal-content">
 
-        <div class="modal-header"><br>
-
+        <div class="modal-header">
+            <p class="ml-3 titile">Disponibilidad de puestos</p> 
+        
         </div>
 
         <div class="modal-body">
-           <div class="row">
-            <div class="container">
+     
          
+                <section class="content mr-4 ml-4">
+                    <div class="container-fluid ">
+                     <div class="col-md-12">
+                        <p class="titile">Puestos disponibles por días</p>
+                        {% for day in more_context %}
+                        {% if day.dias == "Monday" %}
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill ">
+                            Lunes <span class="badge bg-info">{{day.puestos}}</span>
+                          </button>
 
-             </div>
-          </div>
+                          {% elif day.dias == "Tuesday" %}
+                          <button type="button" class="btn btn-outline-primary btn-sm rounded-pill ">
+                            Martes <span class="badge bg-info">{{day.puestos}}</span>
+                          </button>
+
+                          {% elif day.dias == "Wednesday" %}
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill ">
+                            Miércoles <span class="badge bg-info">{{day.puestos}}</span>
+                          </button>
+
+                          {% elif day.dias == "Thursday" %}
+                          <button type="button" class="btn btn-outline-primary btn-sm rounded-pill ">
+                            Jueves <span class="badge bg-info">{{day.puestos}}</span>
+                          </button>
+
+                          {% elif day.dias == "Friday" %}
+                         <button type="button" class="btn btn-outline-primary btn-sm rounded-pill ">
+                            Viernes <span class="badge bg-info">{{day.puestos}}</span>
+                          </button>
+
+                          {% elif day.dias == "Saturday" %}
+
+                          <button type="button" class="btn btn-outline-primary btn-sm rounded-pill ">
+                            Sábado <span class="badge bg-info">{{day.puestos}}</span>
+                          </button>
+
+                          {% endif%}
+                        {% endfor%}
+           
+                         <div class="card-body table-responsive mt-4">
+             
+                           <table id="example1" class="table table-hover dataTable">
+                             <thead>
+                             <tr>
+                               <th> Fecha</th>        
+                               <th> Día</th>                   
+                               <th> Puestos Reservados </th>   
+                             </tr>
+                             </thead>
+             
+                             <tbody> 
+                                {% for register in data %}
+                                <tr>
+                                     <td>{{ register.fecha_reserva }}</td>
+                                     <td>{{register.fecha_reserva|date:'l'}}</td>
+                                     <td>{{ register.total }}</td> 
+                                 
+                                   </tr>
+                             {% endfor %}         
+                             </tbody>
+             
+                           </table>
+             
+                
+             
+                         </div>
+                  
+                     </div>
+                     </div><br>
+                  </section>
+
+
+          
       </div>
   </div>
 </div>
@@ -26,3 +104,25 @@
 
 <script src="{% static 'plugins/datatables/jquery.dataTables.js' %}"></script>
 <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}"></script>
+<script>
+    $(function () {
+        console.log("ingreso... ")
+          $("#example1").DataTable({
+            
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "order": [[ 0, "asc" ]],
+            "responsive": true, 
+            "lengthChange": false, 
+            "autoWidth": false,
+            
+          })
+         
+        });
+        
+</script>

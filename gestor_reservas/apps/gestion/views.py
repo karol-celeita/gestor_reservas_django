@@ -6,6 +6,7 @@ from django.views.generic import  CreateView
 from .models import *
 from datetime import  datetime
 from django.views.generic.list import ListView
+from django.db.models import Count
 
 
 class ReservacionUsuario(CreateView):
@@ -77,4 +78,16 @@ class ListaReservas(ListView):
     model = Usuarios
     template_name = 'lista_reservas.html'
     context_object_name = 'data'
-    queryset: Usuarios.objects.all().order_by('fecha_reserva')
+    queryset= Usuarios.objects.all().values('fecha_reserva').annotate(total=Count('fecha_reserva')).order_by('fecha_reserva')
+    
+    def get_context_data(self, **kwargs):
+        context = super(ListaReservas, self).get_context_data(**kwargs)
+        context.update({
+            'character_universe_list':  Usuarios.objects.all().values('fecha_reserva').annotate(total=Count('fecha_reserva')).order_by('fecha_reserva'),
+            'more_context': Reservacion.objects.all(),
+        })
+        return context
+    
+    
+    def get_queryset(self):
+        return  Usuarios.objects.all().values('fecha_reserva').annotate(total=Count('fecha_reserva')).order_by('fecha_reserva' )
